@@ -68,18 +68,18 @@ model_1.compile(loss = 'binary_crossentropy',
 X_train_normal = X_train_normal.toarray()
 X_test_normal = X_test_normal.toarray()
 
+# Fit the model
 history = model_1.fit(X_train_normal, y_train, epochs=100, callbacks=callbacks, validation_data=(X_test_normal, y_test))
 
+# Save model
 np.save('Auswertung/history.npy', history.history)
+model_1.save('Auswertung/model1')
 
 import matplotlib.pyplot as plt
 pd.DataFrame(history.history).plot()
 plt.ylabel("loss")
 plt.xlabel("epochs")
 plt.show()
-
-model_1.save('Auswertung/model1')
-
 
 from helper_functions import plot_saved_loss_curves
 plot_saved_loss_curves('Auswertung/history.npy')
